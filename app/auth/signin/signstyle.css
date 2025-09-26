@@ -1,0 +1,32 @@
+.signin-container {
+  display: flex;                /* flex */
+  flex-direction: column;       /* flex-col */
+  align-items: center;          /* items-center */
+  justify-content: center;      /* justify-center */
+  height: 100vh;                /* h-screen */
+  background-color: #111827;    /* bg-gray-900 */
+  color: white;                 /* text-white */
+}
+
+.signin-title {
+  font-size: 1.875rem;          /* text-3xl */
+  font-weight: bold;            /* font-bold */
+  margin-bottom: 1.5rem;        /* mb-6 */
+}
+
+.signin-button {
+  background-color: #2563eb;    /* bg-blue-600 */
+  color: white;                 /* text-white */
+  font-weight: bold;            /* font-bold */
+  padding-top: 0.5rem;          /* py-2 */
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;           /* px-4 */
+  padding-right: 1rem;
+  border-radius: 0.25rem;       /* rounded */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.signin-button:hover {
+  background-color: #1d4ed8;    /* hover:bg-blue-700 */
+}

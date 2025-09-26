@@ -1,0 +1,49 @@
+// schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id
+  name      String?
+  email     String?
+  image     String?
+  createdAt DateTime @default(now()) @map("created_at")
+  chats     Chat[]
+  messages  Message[]
+
+  @@map("users")
+}
+
+model Chat {
+  id        Int      @id @default(autoincrement())
+  userId    String   @map("user_id")
+  title     String?
+  timestamp DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages  Message[]
+
+  @@map("chats")
+  @@index([userId], name: "idx_chats_user_id")
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  chatId    Int      @map("chat_id")
+  userId    String   @map("user_id")
+  role      String   // 'user', 'assistant', 'system'
+  content   String
+  liked     Boolean?
+  timestamp DateTime @default(now())
+  chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("messages")
+  @@index([chatId], name: "idx_messages_chat_id")
+  @@index([timestamp], name: "idx_messages_timestamp")
+}
